@@ -1,0 +1,176 @@
+[33mcommit 12e1972645fb341c1d88a970e4a4e9b521b24fcd[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Dhayanandh14 <Dhayanandh14@gmail.com>
+Date:   Sat May 29 14:31:33 2021 +0530
+
+    Render listof todos in /todos
+
+[1mdiff --git a/Gemfile b/Gemfile[m
+[1mindex e159a28..f55170e 100644[m
+[1m--- a/Gemfile[m
+[1m+++ b/Gemfile[m
+[36m@@ -1,22 +1,21 @@[m
+[31m-source 'https://rubygems.org'[m
+[32m+[m[32msource "https://rubygems.org"[m
+ git_source(:github) { |repo| "https://github.com/#{repo}.git" }[m
+ [m
+[31m-ruby '3.0.1'[m
+[32m+[m[32mruby "3.0.1"[m
+ [m
+ # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'[m
+[31m-gem 'rails', '~> 6.1.3', '>= 6.1.3.2'[m
+[32m+[m[32mgem "rails", "~> 6.1.3", ">= 6.1.3.2"[m
+ # Use sqlite3 as the database for Active Record[m
+[31m-gem 'sqlite3', '~> 1.4'[m
+ # Use Puma as the app server[m
+[31m-gem 'puma', '~> 5.0'[m
+[32m+[m[32mgem "puma", "~> 5.0"[m
+ # Use SCSS for stylesheets[m
+[31m-gem 'sass-rails', '>= 6'[m
+[32m+[m[32mgem "sass-rails", ">= 6"[m
+ # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker[m
+[31m-gem 'webpacker', '~> 5.0'[m
+[32m+[m[32mgem "webpacker", "~> 5.0"[m
+ # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks[m
+[31m-gem 'turbolinks', '~> 5'[m
+[32m+[m[32mgem "turbolinks", "~> 5"[m
+ # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder[m
+[31m-gem 'jbuilder', '~> 2.7'[m
+[32m+[m[32mgem "jbuilder", "~> 2.7"[m
+ # Use Redis adapter to run Action Cable in production[m
+ # gem 'redis', '~> 4.0'[m
+ # Use Active Model has_secure_password[m
+[36m@@ -26,31 +25,33 @@[m [mgem 'jbuilder', '~> 2.7'[m
+ # gem 'image_processing', '~> 1.2'[m
+ [m
+ # Reduces boot times through caching; required in config/boot.rb[m
+[31m-gem 'bootsnap', '>= 1.4.4', require: false[m
+[32m+[m[32mgem "bootsnap", ">= 1.4.4", require: false[m
+ [m
+ group :development, :test do[m
+   # Call 'byebug' anywhere in the code to stop execution and get a debugger console[m
+[31m-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw][m
+[32m+[m[32m  gem "byebug", platforms: [:mri, :mingw, :x64_mingw][m
+ end[m
+ [m
+ group :development do[m
+   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.[m
+[31m-  gem 'web-console', '>= 4.1.0'[m
+[32m+[m[32m  gem "web-console", ">= 4.1.0"[m
+   # Display performance information such as SQL time and flame graphs for each request in your browser.[m
+   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md[m
+[31m-  gem 'rack-mini-profiler', '~> 2.0'[m
+[31m-  gem 'listen', '~> 3.3'[m
+[32m+[m[32m  gem "rack-mini-profiler", "~> 2.0"[m
+[32m+[m[32m  gem "listen", "~> 3.3"[m
+   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring[m
+[31m-  gem 'spring'[m
+[32m+[m[32m  gem "spring"[m
+ end[m
+ [m
+ group :test do[m
+   # Adds support for Capybara system testing and selenium driver[m
+[31m-  gem 'capybara', '>= 3.26'[m
+[31m-  gem 'selenium-webdriver'[m
+[32m+[m[32m  gem "capybara", ">= 3.26"[m
+[32m+[m[32m  gem "selenium-webdriver"[m
+   # Easy installation and use of web drivers to run system tests with browsers[m
+[31m-  gem 'webdrivers'[m
+[32m+[m[32m  gem "webdrivers"[m
+ end[m
+ [m
+ # Windows does not include zoneinfo files, so bundle the tzinfo-data gem[m
+[31m-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby][m
+[32m+[m[32mgem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby][m
+[32m+[m
+[32m+[m[32mgem "pg", "~> 1.2"[m
+[1mdiff --git a/Gemfile.lock b/Gemfile.lock[m
+[1mindex a5f293c..62f511d 100644[m
+[1m--- a/Gemfile.lock[m
+[1m+++ b/Gemfile.lock[m
+[36m@@ -102,6 +102,7 @@[m [mGEM[m
+     nio4r (2.5.7)[m
+     nokogiri (1.11.6-x86_64-linux)[m
+       racc (~> 1.4)[m
+[32m+[m[32m    pg (1.2.3)[m
+     public_suffix (4.0.6)[m
+     puma (5.3.2)[m
+       nio4r (~> 2.0)[m
+[36m@@ -167,7 +168,6 @@[m [mGEM[m
+       actionpack (>= 4.0)[m
+       activesupport (>= 4.0)[m
+       sprockets (>= 3.0.0)[m
+[31m-    sqlite3 (1.4.2)[m
+     thor (1.1.0)[m
+     tilt (2.0.10)[m
+     turbolinks (5.2.1)[m
+[36m@@ -205,13 +205,13 @@[m [mDEPENDENCIES[m
+   capybara (>= 3.26)[m
+   jbuilder (~> 2.7)[m
+   listen (~> 3.3)[m
+[32m+[m[32m  pg (~> 1.2)[m
+   puma (~> 5.0)[m
+   rack-mini-profiler (~> 2.0)[m
+   rails (~> 6.1.3, >= 6.1.3.2)[m
+   sass-rails (>= 6)[m
+   selenium-webdriver[m
+   spring[m
+[31m-  sqlite3 (~> 1.4)[m
+   turbolinks (~> 5)[m
+   tzinfo-data[m
+   web-console (>= 4.1.0)[m
+[1mdiff --git a/app/controllers/todos_controller.rb b/app/controllers/todos_controller.rb[m
+[1mindex 17b6ef5..782fc62 100644[m
+[1m--- a/app/controllers/todos_controller.rb[m
+[1m+++ b/app/controllers/todos_controller.rb[m
+[36m@@ -1,5 +1,5 @@[m
+ class TodosController < ApplicationController[m
+   def index[m
+[31m-    render plain: "Hello, this is /todos!"[m
+[32m+[m[32m    render plain: Todo.all.to_a[m[41m[m
+   end[m
+ end[m
+[1mdiff --git a/app/models/todo.rb b/app/models/todo.rb[m
+[1mnew file mode 100644[m
+[1mindex 0000000..617e446[m
+[1m--- /dev/null[m
+[1m+++ b/app/models/todo.rb[m
+[36m@@ -0,0 +1,2 @@[m
+[32m+[m[32mclass Todo<ActiveRecord::Base[m[41m[m
+[32m+[m[32mend[m[41m[m
+[1mdiff --git a/config/database.yml b/config/database.yml[m
+[1mindex 4a8a1b2..20d4f51 100644[m
+[1m--- a/config/database.yml[m
+[1m+++ b/config/database.yml[m
+[36m@@ -1,25 +1,22 @@[m
+[31m-# SQLite. Versions 3.8.0 and up are supported.[m
+[31m-#   gem install sqlite3[m
+[31m-#[m
+[31m-#   Ensure the SQLite 3 gem is defined in your Gemfile[m
+[31m-#   gem 'sqlite3'[m
+[31m-#[m
+ default: &default[m
+[31m-  adapter: sqlite3[m
+[32m+[m[32m  adapter: postgresql[m
+   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>[m
+   timeout: 5000[m
+ [m
+ development:[m
+   <<: *default[m
+[31m-  database: db/development.sqlite3[m
+[32m+[m[32m  host: localhost[m
+[32m+[m[32m  user: postgres[m
+[32m+[m[32m  password: changeme[m
+[32m+[m[32m  database: saas_db[m
+ [m
+ # Warning: The database defined as "test" will be erased and[m
+ # re-generated from your development database when you run "rake".[m
+ # Do not set this db to the same as development or production.[m
+ test:[m
+   <<: *default[m
+[31m-  database: db/test.sqlite3[m
+[32m+[m[32m  database: test_saas_db[m
+ [m
+ production:[m
+   <<: *default[m
+[31m-  database: db/production.sqlite3[m
+[32m+[m[32m  database: prod_saas_db[m
