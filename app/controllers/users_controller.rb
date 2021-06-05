@@ -9,13 +9,8 @@ class UsersController < ApplicationController
   def login
     email = params[:email]
     password = params[:password]
-    checkmail = User.find_by(email: email) ? true : false
-    checkpass = User.find_by(password: password) ? true : false
-    if checkmail && checkpass
-      render plain: "true"
-    else
-      render plain: "false"
-    end
+    user = User.where("email = ? and password = ?", email, password).first
+    render plain: user.present?
   end
 
   #create the user given email name password
