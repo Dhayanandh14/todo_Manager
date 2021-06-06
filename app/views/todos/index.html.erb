@@ -1,26 +1,25 @@
  <main class="TodoPageMain">
    <article>
      <h1 class="TodoPage-title">My Todo-list</h1>
-     <form class="AddTodo" action="/todos" method="POST">
-       <input type="text" class="AddTodo-text" placeholder="What's next" name="todo_text">
-       <input type="date" class="AddTodo-date" name="due_date">
-       <input type="submit" value="Add" class="AddTodo-button">
-
-     </form>
-    <%= render partial: "todo-section", locals: {
-                 section_title: "Overdue",
-                 todos: Todo.overdue,
-                 show_due_date: true,
-               } %>
-    <%= render partial: "todo-section", locals: {
-                 section_title: "Due Today",
-                 todos: Todo.due_today,
-                 show_due_date: false,
-               } %>
-    <%= render partial: "todo-section", locals: {
-                 section_title: "Due Later",
-                 todos: Todo.due_later,
-                 show_due_date: true,
-               } %>
+      <%= form_with(url: "/todos", method: "post", class: "AddTodo") do %>
+        <input type="text" class="AddTodo-text" placeholder="What's next" name="todo_text">
+        <input type="date" class="AddTodo-date" name="due_date">
+        <input type="submit" value="Add" class="AddTodo-button">
+      <% end %>
+      <%= render partial: "todo-section", locals: {
+                   section_title: "Overdue",
+                   todos: Todo.overdue,
+                   show_due_date: true,
+                 } %>
+      <%= render partial: "todo-section", locals: {
+                   section_title: "Due Today",
+                   todos: Todo.due_today,
+                   show_due_date: false,
+                 } %>
+      <%= render partial: "todo-section", locals: {
+                   section_title: "Due Later",
+                   todos: Todo.due_later,
+                   show_due_date: true,
+                 } %>
    </article>
  </main>
