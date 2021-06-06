@@ -11,14 +11,20 @@
           <div class="TodoItem-container">
             <% if todo.completed %>
               <input type="checkbox" class="TodoItem-checkbox TodoItem_completed" checked>
-              <p class="TodoItem_completed"><%= todo.todo_text %></p>
+              <p class="TodoItem_completed">
+                <%= todo.todo_text %>
+              </p>
             <% else %>
               <input type="checkbox" class="TodoItem-checkbox">
-              <p><%= todo.todo_text %></p>
+              <p>
+                <%= todo.todo_text %>
+              </p>
             <% end %>
 
             <% if show_due_date %>
-              <p class="TodoItem-dueDate"><%= todo.due_date.to_s(:short) %></p>
+              <p class="TodoItem-dueDate">
+                <%= todo.due_date.to_s(:short) %>
+              </p>
             <% end %>
             <a href="javascript:void(0)" class="TodoItem-delete"><img src="./trash-can.svg" alt=""></a>
           </div>
