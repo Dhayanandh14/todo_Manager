@@ -16,13 +16,16 @@
                 <%= todo.todo_text %>
           </p>
 
-
             <% if show_due_date %>
               <p class="TodoItem-dueDate">
                 <%= todo.due_date.to_s(:short) %>
               </p>
             <% end %>
-            <a href="javascript:void(0)" class="TodoItem-delete"><img src="./trash-can.svg" alt=""></a>
+            <a href="javascript:void(0)" class="TodoItem-delete">
+               <%= form_with(url: "/todos/#{todo.id}", method: "delete") do %>
+                  <input type="image" src="trash-can.svg" style="width:15px">
+               <% end %>
+            </a>
           </label>
         </li>
     <% end %>
