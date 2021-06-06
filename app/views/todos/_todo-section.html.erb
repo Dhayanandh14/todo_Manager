@@ -8,18 +8,14 @@
     <% todos.each do |todo| %>
       <% if !(todo.completed && section_title == "Overdue") %>
         <li class="TodoItem">
-          <div class="TodoItem-container">
-            <% if todo.completed %>
-              <input type="checkbox" class="TodoItem-checkbox TodoItem_completed" checked>
-              <p class="TodoItem_completed">
+          <label class="TodoItem-container">
+          <%= form_with(url: "/todos/#{todo.id}", method: "put") do %>
+            <input class="TodoItem-checkbox" name="completed" type="checkbox" <%= todo.completed ? "checked" : "" %> onclick="this.form.submit()"/>
+          <% end %>
+          <p class='<%= todo.completed ? "TodoItem_completed" : "" %>'>
                 <%= todo.todo_text %>
-              </p>
-            <% else %>
-              <input type="checkbox" class="TodoItem-checkbox">
-              <p>
-                <%= todo.todo_text %>
-              </p>
-            <% end %>
+          </p>
+
 
             <% if show_due_date %>
               <p class="TodoItem-dueDate">
@@ -27,7 +23,7 @@
               </p>
             <% end %>
             <a href="javascript:void(0)" class="TodoItem-delete"><img src="./trash-can.svg" alt=""></a>
-          </div>
+          </label>
         </li>
     <% end %>
   <% end %>
