@@ -6,7 +6,6 @@
 
   <ul>
     <% todos.each do |todo| %>
-      <% if !(todo.completed && section_title == "Overdue") %>
         <li class="TodoItem">
           <div class="TodoItem-container">
             <% if todo.completed %>
@@ -29,7 +28,6 @@
             <a href="javascript:void(0)" class="TodoItem-delete"><img src="./trash-can.svg" alt=""></a>
           </div>
         </li>
-    <% end %>
   <% end %>
   </ul>
 </section>
