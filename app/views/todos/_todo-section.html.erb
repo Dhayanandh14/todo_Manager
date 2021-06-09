@@ -8,8 +8,10 @@
     <% todos.each do |todo| %>
         <li class="TodoItem">
           <div class="TodoItem-container">
-            <input class="TodoItem-Checkbox" type="checkbox" <%= todo.completed ? "checked" : "" %>>
-            <p class="TodoItem_completed"> <%= todo.todo_text %></p>
+           <input class="TodoItem-Checkbox" type="checkbox" <%= todo.completed ? "checked" : "" %>>
+            <p class = <%= (todo.completed) ? "TodoItem_completed" : "" %> >
+              <%= todo.todo_text %>
+            </p>
             <% if show_due_date %>
               <p class="TodoItem-dueDate">
                 <%= todo.due_date.to_s(:short) %>
