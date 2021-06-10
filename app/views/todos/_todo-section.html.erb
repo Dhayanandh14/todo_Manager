@@ -6,7 +6,6 @@
 
   <ul>
     <% todos.each do |todo| %>
-      <% if !(todo.completed && section_title == "Overdue") %>
         <li class="TodoItem">
           <label class="TodoItem-container">
           <%= form_with(url: "/todos/#{todo.id}", method: "put") do %>
@@ -16,19 +15,18 @@
               <%= todo.todo_text %>
           </p>
 
-            <% if show_due_date %>
-              <p class="TodoItem-dueDate">
-                <%= todo.due_date.to_s(:short) %>
-              </p>
-            <% end %>
-            <a href="javascript:void(0)" class="TodoItem-delete">
-               <%= form_with(url: "/todos/#{todo.id}", method: "delete") do %>
-                   <%= image_submit_tag("trash-can.svg",class:"trash-can") %>
-               <% end %>
-            </a>
+          <% if show_due_date %>
+            <p class="TodoItem-dueDate">
+              <%= todo.due_date.to_s(:short) %>
+            </p>
+          <% end %>
+          <a href="javascript:void(0)" class="TodoItem-delete">
+              <%= form_with(url: "/todos/#{todo.id}", method: "delete") do %>
+                <%= image_submit_tag("trash-can.svg",class:"trash-can") %>
+              <% end %>
+          </a>
           </label>
         </li>
     <% end %>
-  <% end %>
   </ul>
 </section>
