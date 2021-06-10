@@ -21,9 +21,13 @@ class UsersController < ApplicationController
     last_name = params[:last_name]
     email = params[:email]
     password = params[:password]
-    users = User.create!(first_name: first_name, last_name: last_name,email: email, password: password)
-    redirect_to "/"
-    # response_text = "Yeah Your Account is Created FirstName: #{first_name}  LastName: #{last_name}  Email:#{email}"
-    # render plain: response_text
+    users = User.new(first_name: first_name, last_name: last_name,email: email, password: password)
+    if users.save
+      # session[:current_user_id]=users.id
+      redirect_to "/"
+    else
+      flash[:error] = users.errors.full_messages.join(", ")
+      redirect_to new_user_path
+    end
   end
 end
