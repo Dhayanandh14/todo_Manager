@@ -118,3 +118,6 @@ body {
 .TodoItem_completed {
   text-decoration: line-through;
 }
+.trash-can{
+  width: 15px;
+}

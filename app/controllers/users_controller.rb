@@ -5,7 +5,6 @@ class UsersController < ApplicationController
     render plain: User.all.map { |user| user.to_users }.join("\n") #show the user details
   end
 
-  #check the email id and password is there in database
   def login
     email = params[:email]
     password = params[:password]
@@ -13,7 +12,6 @@ class UsersController < ApplicationController
     render plain: user.present?
   end
 
-  #create the user given email name password
   def create
     name = params[:name]
     email = params[:email]
