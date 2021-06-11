@@ -73,12 +73,6 @@
   height: 16px;
 }
 
-/* .TodoItem-overdueLabel {
-  margin-left: 10px;
-  color: #C53030;
-  font-size: 12px;
-  display: inline;
-} */
 .TodoItem-dueDate{
   margin-left: 10px;
   font-size: 10px;
