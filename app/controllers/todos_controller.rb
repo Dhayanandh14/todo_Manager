@@ -1,5 +1,4 @@
 class TodosController < ApplicationController
-  # skip_before_action :verify_authenticity_token
 
   def index
     @todos=Todo.of_user(current_user)
@@ -10,7 +9,6 @@ class TodosController < ApplicationController
     id = params[:id]
     todo = Todo.of_user(current_user).find(id)
     render "todo"
-    # render plain: todo.to_pleasant_string
   end
 
   def create
